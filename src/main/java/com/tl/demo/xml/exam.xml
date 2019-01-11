@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<students>
+    <student>
+        <name id="111">谭亮</name>
+        <age>23</age>
+        <gender>男的</gender>
+    </student>
+    <student>
+        <name id="222">张三</name>
+        <age>21</age>
+        <gender>女</gender>
+    </student>
+</students>
