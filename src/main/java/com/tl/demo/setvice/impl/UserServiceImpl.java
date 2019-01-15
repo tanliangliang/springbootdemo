@@ -2,6 +2,7 @@ package com.tl.demo.setvice.impl;
 
 import com.tl.demo.common.Const;
 import com.tl.demo.common.ServerResponse;
+import com.tl.demo.common.TokenCache;
 import com.tl.demo.dao.UserDAO;
 import com.tl.demo.setvice.IUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
+
 @Service
 public class UserServiceImpl implements IUserService{
     @Autowired
@@ -75,6 +78,18 @@ public class UserServiceImpl implements IUserService{
         String question=userDAO.selectQuestion(username);
         if(StringUtils.isNoneBlank(question)) return ServerResponse.createBySuccess(question);
         return ServerResponse.createByErrorMessage("找回密码的问题是空的");
+    }
+
+    @Override
+    public ServerResponse<String> checkAnswer(String username, String question, String answer) {
+        int resultCount = userDAO.checkAnswer(username,question,answer);
+        if(resultCount>0){
+            //说明问题及问题答案是这个用户的,并且是正确的
+            String forgetToken = UUID.randomUUID().toString();
+            TokenCache.setKey(TokenCache.TOKEN_PREFIX+username,forgetToken);
+            return ServerResponse.createBySuccess(forgetToken);
+        }
+        return ServerResponse.createByErrorMessage("问题的答案错误");
     }
 
 

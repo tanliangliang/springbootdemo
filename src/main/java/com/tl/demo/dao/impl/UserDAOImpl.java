@@ -42,4 +42,10 @@ public class UserDAOImpl extends JDBCBaseDAOImpl implements UserDAO{
         String sql=" select question from user where username = ? ";
         return jdbcTemplate.queryForObject(sql,String.class,username);
     }
+
+    @Override
+    public int checkAnswer(String username, String question, String answer) {
+        String sql=" SELECT count(1) from user  where username=? and question = ?  and answer = ?";
+        return jdbcTemplate.queryForObject(sql,Integer.class,username,question,answer);
+    }
 }

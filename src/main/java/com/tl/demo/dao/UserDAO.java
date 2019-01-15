@@ -8,4 +8,5 @@ public interface UserDAO extends JDBCbaseDAO{
     Map<String,String>login(String username,String pwd);
     int insert(Map map);
     String selectQuestion(String username);
+    int checkAnswer(String username,String question,String answer);
 }

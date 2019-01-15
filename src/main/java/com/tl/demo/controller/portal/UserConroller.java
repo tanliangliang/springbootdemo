@@ -48,4 +48,9 @@ public class UserConroller {
     public ServerResponse<String>forgetquestion(String username){
         return userService.selectQuestion(username);
     }
+
+    @RequestMapping(value = "/forget_check_answer",method = RequestMethod.POST)
+    public ServerResponse<String> forgetCheckAnswer(String username,String question,String answer){
+        return userService.checkAnswer(username,question,answer);
+    }
 }
