@@ -7,4 +7,5 @@ public interface UserDAO extends JDBCbaseDAO{
     int check(String username,String zdm);
     Map<String,String>login(String username,String pwd);
     int insert(Map map);
+    String selectQuestion(String username);
 }

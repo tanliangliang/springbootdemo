@@ -36,4 +36,10 @@ public class UserDAOImpl extends JDBCBaseDAOImpl implements UserDAO{
         return jdbcTemplate.update(sql,new Object[] {map.get("username"),map.get("password"),
        map.get("email"),map.get("phone"),map.get("question"),map.get("answer"),map.get("role")} );
     }
+
+    @Override
+    public String selectQuestion(String username) {
+        String sql=" select question from user where username = ? ";
+        return jdbcTemplate.queryForObject(sql,String.class,username);
+    }
 }

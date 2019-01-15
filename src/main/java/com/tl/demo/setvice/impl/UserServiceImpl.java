@@ -65,5 +65,17 @@ public class UserServiceImpl implements IUserService{
         return ServerResponse.createBySuccessMessage("校验成功");
     }
 
+    @Override
+    public ServerResponse selectQuestion(String username) {
+        ServerResponse response=this.checkValid(username,Const.USERNAME);
+        if(response.isSuccess()){
+            //用户不存在
+            return ServerResponse.createByErrorMessage("用户不存在");
+        }
+        String question=userDAO.selectQuestion(username);
+        if(StringUtils.isNoneBlank(question)) return ServerResponse.createBySuccess(question);
+        return ServerResponse.createByErrorMessage("找回密码的问题是空的");
+    }
+
 
 }
